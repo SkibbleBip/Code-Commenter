@@ -15,10 +15,10 @@ fileHeader(){
 	read num
 	declare -a procedureName
 	declare -a procedureDesc
-	
-	
+
+
 	for(( c=0; c<$num; c++ ))
-	do 
+	do
 	echo "Procedure name:"
 	read name
 	echo "Procedure description:"
@@ -27,21 +27,21 @@ fileHeader(){
 	procedureDesc[c]=$desc
 	done
 	echo -e "\n\n"
-	
+
 	echo "/***************************************************************************"
 	echo "* File: " $fileName
 	echo "* Author: " $username
 	echo "* Procedures: "
-	
-	
+
+
 	for(( i=0; i<num; i++ ))
 	do
 		echo -e "* "${procedureName[i]}"\t-"${procedureDesc[i]}
-	
+
 	done
-	
+
 	echo "***************************************************************************/"
-	
+
 }
 
 
@@ -53,15 +53,15 @@ procedureHeader(){
 	read protoDesc
 	echo "Enter number of parameters:"
 	read numParams
-	
-	
+
+
 	declare -a paramName
 	declare -a paramIO
 	declare -a paramType
 	declare -a paramDesc
-	
-	
-	
+
+
+
 	for(( i=0; i<numParams; i++ ))
 	do
 		echo -n "Enter parameter name: "
@@ -72,16 +72,16 @@ procedureHeader(){
 		read t 
 		echo -n "Enter paramter description: "
 		read d
-		
+
 		paramName[i]=$n
 		paramIO[i]=$io
 		paramType[i]=$t
 		paramDesc[i]=$d
-	
+
 	done
-	
+
 	echo -e "\n\n"
-	
+
 	echo "/***************************************************************************"
 	echo "*" $prototype
 	echo "* Author:" $username
@@ -93,16 +93,24 @@ procedureHeader(){
 	for(( i=0; i<numParams; i++ ))
 	do
 		echo -e "*\t" ${paramName[i]}"    "${paramIO[i]}"    "${paramType[i]}"    "${paramDesc[i]}
-		
+
 	done
-	
+
 	echo "**************************************************************************/"
 
 
 }
 
-echo "Enter author name:"
-read username
+
+if [ -f "$HOME/.code-commenter" ]; then
+	 username=$(cat "$HOME/.code-commenter" | grep "Name" | awk '{print $2}')
+else
+	echo "Enter author name:"
+	read username
+	echo "Name" $username >> "$HOME/.code-commenter"
+fi
+
+
 
 echo "Author:" $username
 echo "What would you like to write comments for?"
