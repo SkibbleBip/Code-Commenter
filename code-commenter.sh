@@ -10,9 +10,9 @@
 
 fileHeader(){
 	echo "Filename:"
-	read fileName
+	read -e fileName
 	echo "Number of Procedures:"
-	read num
+	read -e num
 	declare -a procedureName
 	declare -a procedureDesc
 
@@ -20,9 +20,9 @@ fileHeader(){
 	for(( c=0; c<$num; c++ ))
 	do
 	echo "Procedure name:"
-	read name
+	read -e name
 	echo "Procedure description:"
-	read desc
+	read -e desc
 	procedureName[c]=$name
 	procedureDesc[c]=$desc
 	done
@@ -48,11 +48,11 @@ fileHeader(){
 procedureHeader(){
 
 	echo "Enter function prototype:"
-	read prototype
+	read -e prototype
 	echo "Enter description:"
-	read protoDesc
+	read -e protoDesc
 	echo "Enter number of parameters:"
-	read numParams
+	read -e numParams
 
 
 	declare -a paramName
@@ -65,13 +65,13 @@ procedureHeader(){
 	for(( i=0; i<numParams; i++ ))
 	do
 		echo -n "Enter parameter name: "
-		read n
+		read -e n
 		echo -n "Enter parameter IO (I/P, O/P, I/O): "
-		read io
+		read -e io
 		echo -n "Enter parameter type (int, double, char*): "
-		read t 
+		read -e t 
 		echo -n "Enter paramter description: "
-		read d
+		read -e d
 
 		paramName[i]=$n
 		paramIO[i]=$io
@@ -106,7 +106,7 @@ if [ -f "$HOME/.code-commenter" ]; then
 	 username=$(cat "$HOME/.code-commenter" | awk -F'Name ' '{print $2}')
 else
 	echo "Enter author name:"
-	read username
+	read -e username
 	echo "Name" $username >> "$HOME/.code-commenter"
 fi
 
@@ -121,7 +121,7 @@ echo 	"
 	3: Exit
 	"
 
-read choice
+read -e choice
 
 case $choice in
 
