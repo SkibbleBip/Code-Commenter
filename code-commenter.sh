@@ -22,7 +22,7 @@ fileHeader(){
 	echo "Procedure name:"
 	read name
 	echo "Procedure description:"
-	read desc 
+	read desc
 	procedureName[c]=$name
 	procedureDesc[c]=$desc
 	done
@@ -103,7 +103,7 @@ procedureHeader(){
 
 
 if [ -f "$HOME/.code-commenter" ]; then
-	 username=$(cat "$HOME/.code-commenter" | grep "Name" | awk '{print $2}')
+	 username=$(cat "$HOME/.code-commenter" | awk -F'Name ' '{print $2}')
 else
 	echo "Enter author name:"
 	read username
